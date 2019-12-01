@@ -1,0 +1,40 @@
+import java.util.*;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        char[] sales = sc.nextLine().toCharArray();
+        char[] bought = sc.nextLine().toCharArray();
+ 
+        Arrays.sort(sales);
+        Arrays.sort(bought);
+ 
+        int t = 0;
+        for (int i = 0, j = 0; j < bought.length;) {
+            if (i != sales.length) {
+ 
+                if (sales[i] == bought[j]) {
+                    i++;
+                    j++;
+                } else if (sales[i] > bought[j]) {
+                    j++;
+                    t++;
+                } else {
+                    i++;
+                    if (i == sales.length) {
+                        t += sales.length - i;
+                    }
+                }
+            } else {
+                t += bought.length - j;
+                break;
+            }
+        }
+ 
+        if (t == 0) {
+            System.out.println("Yes " + (sales.length - bought.length));
+        } else {
+            System.out.println("No " + t);
+        }
+    }
+}
