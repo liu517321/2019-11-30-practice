@@ -1,0 +1,62 @@
+import java.util.*;
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Plus {
+    public ListNode plusAB(ListNode a, ListNode b) {
+        // write code here
+        ListNode a1 = reverse(a);
+        ListNode b1 = reverse(b);
+        ListNode cur1 = a1;
+        ListNode cur2 = b1;
+        ListNode result = null;
+        if(cur1 == null)
+            return cur2;
+        if(cur2 == null)
+            return cur1;
+        int t = 0;
+        int s = 0;
+        while(cur1 != null || cur2 != null) {
+            if(cur1 != null) {
+                s += cur1.val;
+                cur1 = cur1.next;
+            }
+            if(cur2!= null) {
+                s += cur2.val;
+                cur2 = cur1.next;
+            }
+            if (s > 9) {
+                s -= 10;
+                t = 1;
+            } else {
+                t = 0;
+            }
+            ListNode node = new ListNode(s);
+            result.next = node;
+            result = result.next;
+        }
+        if (t == 1) {
+            ListNode node = new ListNode(1);
+            result.next = node;
+        }
+        return result.next;
+    }
+    public ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while(cur != null) {
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = cur.next;
+        }
+        return pre;
+    } 
+}
+
